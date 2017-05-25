@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Excute">実行(_E)</system:String>
+    <system:String x:Key="Sync">同期</system:String>
+    <system:String x:Key="Language">言語(_L)</system:String>   
+    <system:String x:Key="Help">ヘルプ(_H)</system:String>
+    <system:String x:Key="About">情報(_A)</system:String>
+    <system:String x:Key="Check_for_new_version">新バージョンの確認(_C)</system:String>
+    <system:String x:Key="sync_source">同期元</system:String> 
+    <system:String x:Key="sync_destination">同期先</system:String>
+    <system:String x:Key="Input">入力</system:String>
+    <system:String x:Key="Output">出力</system:String>
+    <system:String x:Key="Option">オプション</system:String>
+    <system:String x:Key="Mirroring">ミラーリング</system:String>
+    <system:String x:Key="Mirroring_tooltip">同期先のファイルが削除されることがある</system:String>
+    <system:String x:Key="Embed_Artwork">アルバムアートを埋め込む</system:String>
+    <system:String x:Key="Embed_tooltip">入力音楽と同一階層にあるFolder.jpg</system:String>
+    <system:String x:Key="now_sync?">今すぐ同期を開始しますか?</system:String>
+    <system:String x:Key="add">追加 :</system:String>
+    <system:String x:Key="update">更新 :</system:String>
+    <system:String x:Key="delete">削除 :</system:String>
+    <system:String x:Key="start">スタート</system:String>
+    <system:String x:Key="cancle">キャンセル</system:String>
+</ResourceDictionary>

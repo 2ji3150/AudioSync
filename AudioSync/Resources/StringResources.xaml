@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Excute">Excute(_E)</system:String>
+    <system:String x:Key="Sync">Sync</system:String>
+    <system:String x:Key="Language">Language(_L)</system:String>
+    <system:String x:Key="Help">Help(_H)</system:String>
+    <system:String x:Key="About">About(_A)</system:String>
+    <system:String x:Key="Check_for_new_version">Check for new version(_C)</system:String>
+    <system:String x:Key="sync_source">src</system:String>  
+    <system:String x:Key="sync_destination">dest</system:String>
+    <system:String x:Key="Input">Input</system:String>
+    <system:String x:Key="Output">Output</system:String>    
+    <system:String x:Key="Option">Option</system:String>
+    <system:String x:Key="Mirroring">Mirroring</system:String>
+    <system:String x:Key="Mirroring_tooltip">May delete files in Dest Dir</system:String>
+    <system:String x:Key="Embed_Artwork">Embed Artwork</system:String>
+    <system:String x:Key="Embed_tooltip">"Folder.jpg" which in same Dir</system:String>
+    <system:String x:Key="now_sync?">Are you ready to sync now?</system:String>
+    <system:String x:Key="add">add :</system:String>
+    <system:String x:Key="update">update :</system:String>
+    <system:String x:Key="delete">delete :</system:String>
+    <system:String x:Key="start">start</system:String>
+    <system:String x:Key="cancle">cancel</system:String>
+</ResourceDictionary>
