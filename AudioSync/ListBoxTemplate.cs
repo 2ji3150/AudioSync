@@ -1,5 +1,5 @@
 ﻿namespace AudioSync {
-    class ListBoxTemplate {
+    public class ListBoxTemplate {
         private short _iconID;
         private string _fullpath;
 

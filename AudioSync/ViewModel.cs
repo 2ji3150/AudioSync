@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using AudioSync.Properties;
+using Reactive.Bindings;
 
 namespace AudioSync {
     class ViewModel : INotifyPropertyChanged {
