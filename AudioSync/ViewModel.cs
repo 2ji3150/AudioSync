@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace AudioSync {
     public class ViewModel {
         public ObservableCollection<ListBoxTemplate> ListBoxitems { get; } = new ObservableCollection<ListBoxTemplate>();
-        public ReactiveProperty<short> OutIndex { get; } = new ReactiveProperty<short>(Settings.Default.outindex);
+        public ReactiveProperty<int> OutIndex { get; } = new ReactiveProperty<int>(Settings.Default.outindex);
         public ReactiveProperty<double> Pvalue { get; } = new ReactiveProperty<double>();
         public ReactiveProperty<string> Src { get; } = new ReactiveProperty<string>(Settings.Default.src);
         public ReactiveProperty<string> Dst { get; } = new ReactiveProperty<string>(Settings.Default.dst);

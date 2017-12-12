@@ -50,9 +50,9 @@ namespace AudioSync.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public short outindex {
+        public int outindex {
             get {
-                return ((short)(this["outindex"]));
+                return ((int)(this["outindex"]));
             }
             set {
                 this["outindex"] = value;

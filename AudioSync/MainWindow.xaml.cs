@@ -28,7 +28,7 @@ namespace AudioSync {
         private async void SyncCommand_Executed(object sender, ExecutedRoutedEventArgs e) {
             vm.ListBoxitems.Clear();
             SyncService syncservice = new SyncService(ref vm);
-            ushort[] change = syncservice.Scan();
+            int[] change = syncservice.Scan();
             SyncPreReport spr = new SyncPreReport(ref dict, ref change) { Owner = this };
             if (spr.ShowDialog() != true) {
                 vm.Idle.Value = true;

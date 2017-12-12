@@ -1,13 +1,13 @@
 ﻿namespace AudioSync {
     public struct ListBoxTemplate {
-        private short _iconID;
+        private int _iconID;
         private string _fullpath;
 
         public ListBoxTemplate(short ID, string Path) {
             _iconID = ID;
             _fullpath = Path;
         }
-        public short IconID {
+        public int IconID {
             get => _iconID; set => _iconID = value;
         }
         public string FullPath {

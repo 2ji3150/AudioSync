@@ -13,7 +13,7 @@ namespace AudioSync {
         List<string> DirCreateQ = new List<string>();
         List<string> ArgQ = new List<string>();
         Outputter opt;
-        ushort[] change = new ushort[3];
+        int[] change = new int[3];
         enum Listicon : short { add, update, delete };
         private int total = 0, current = 0;
 
@@ -22,7 +22,7 @@ namespace AudioSync {
             opt = vm.Embed.Value ? new Outputter(new OutEmbededAppleCodec()) : new Outputter(new OutAppleCodec());
         }
 
-        public ushort[] Scan() {
+        public int[] Scan() {
             _vm.Idle.Value = false;
             _vm.Waiting.Value = true;
             if (_vm.Mirroring.Value) CleanDst();
@@ -33,16 +33,16 @@ namespace AudioSync {
                 string dstNowDir = _vm.Dst + NowDir.Substring(_vm.Src.Value.Length);
                 bool dstNowDirExist = Directory.Exists(dstNowDir);
                 bool createdir = false;
-                foreach (string file in Directory.EnumerateFiles(NowDir).Where(f => f.EndsWith(".wv"))) {
+                foreach (string file in Directory.EnumerateFiles(NowDir, "*.wv")) {
                     string dstfile = Path.Combine(dstNowDir, $"{Path.GetFileNameWithoutExtension(file)}.m4a");
                     if (dstNowDirExist && File.Exists(dstfile) && File.GetLastWriteTime(dstfile) < File.GetLastWriteTime(file)) {
                         ArgQ.Add(opt.Out(file, dstfile));
-                        _vm.ListBoxitems.Add(new ListBoxTemplate((short)Listicon.update, dstfile));
+                        _vm.ListBoxitems.Add(new ListBoxTemplate((int)Listicon.update, dstfile));
                         change[1]++;
                     }
                     else {
                         ArgQ.Add(opt.Out(file, dstfile));
-                        _vm.ListBoxitems.Add(new ListBoxTemplate((short)Listicon.add, dstfile));
+                        _vm.ListBoxitems.Add(new ListBoxTemplate((int)Listicon.add, dstfile));
                         createdir = true;
                         change[0]++;
                     }
@@ -63,7 +63,7 @@ namespace AudioSync {
                 string srcNowDir = _vm.Src + NowDir.Substring(_vm.Dst.Value.Length);
                 foreach (var file in Directory.EnumerateFiles(NowDir)) {
                     if (!file.EndsWith(".m4a") || !File.Exists(Path.ChangeExtension(Path.Combine(srcNowDir, Path.GetFileName(file)), ".wv"))) {
-                        _vm.ListBoxitems.Add(new ListBoxTemplate((short)Listicon.delete, file));
+                        _vm.ListBoxitems.Add(new ListBoxTemplate((int)Listicon.delete, file));
                         CleanFile.Add(file);
                         change[2]++;
                     }
@@ -71,7 +71,7 @@ namespace AudioSync {
                 foreach (string subDir in Directory.EnumerateDirectories(NowDir)) {
                     if (Directory.Exists(Path.Combine(srcNowDir, Path.GetFileName(subDir)))) stack.Push(subDir);
                     else {
-                        _vm.ListBoxitems.Add(new ListBoxTemplate((short)Listicon.delete, subDir));
+                        _vm.ListBoxitems.Add(new ListBoxTemplate((int)Listicon.delete, subDir));
                         CleanDiretory.Add(subDir);
                         change[2]++;
                     }

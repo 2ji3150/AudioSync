@@ -5,7 +5,7 @@ namespace AudioSync {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class SyncPreReport : Window {
-        public SyncPreReport(ref ResourceDictionary dict, ref ushort[] change) {
+        public SyncPreReport(ref ResourceDictionary dict, ref int[] change) {
             Resources.MergedDictionaries.Add(dict);
             InitializeComponent();
             DST_ADD.Text += $" {change[0]}";
@@ -13,12 +13,8 @@ namespace AudioSync {
             DST_D.Text += $" {change[2]}";
         }
 
-        private void ButtonOK_Click(object sender, RoutedEventArgs e) {
-            DialogResult = true;
-        }
+        private void ButtonOK_Click(object sender, RoutedEventArgs e) => DialogResult = true;
 
-        private void Close_Executed(object sender, RoutedEventArgs e) {
-            Close();
-        }
+        private void Close_Executed(object sender, RoutedEventArgs e) => Close();
     }
 }
