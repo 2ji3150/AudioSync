@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,18 +19,18 @@ namespace AudioSync {
 
         public SyncService(ref ViewModel vm) {
             _vm = vm;
-            opt = vm.Embed ? new Outputter(new OutEmbededAppleCodec()) : new Outputter(new OutAppleCodec());
+            opt = vm.Embed.Value ? new Outputter(new OutEmbededAppleCodec()) : new Outputter(new OutAppleCodec());
         }
 
         public ushort[] Scan() {
-            _vm.Idle = false;
-            _vm.Waiting = true;
-            if (_vm.Mirroring) CleanDst();
+            _vm.Idle.Value = false;
+            _vm.Waiting.Value = true;
+            if (_vm.Mirroring.Value) CleanDst();
             var stack = new Stack<string>();
-            stack.Push(_vm.Src);
+            stack.Push(_vm.Src.Value);
             while (stack.Count() > 0) {
                 string NowDir = stack.Pop();
-                string dstNowDir = _vm.Dst + NowDir.Substring(_vm.Src.Length);
+                string dstNowDir = _vm.Dst + NowDir.Substring(_vm.Src.Value.Length);
                 bool dstNowDirExist = Directory.Exists(dstNowDir);
                 bool createdir = false;
                 foreach (string file in Directory.EnumerateFiles(NowDir).Where(f => f.EndsWith(".wv"))) {
@@ -52,16 +51,16 @@ namespace AudioSync {
                 if (createdir) DirCreateQ.Add(dstNowDir);
                 foreach (string subDir in Directory.EnumerateDirectories(NowDir)) stack.Push(subDir);
             }
-            _vm.Waiting = false;
+            _vm.Waiting.Value = false;
             return change;
         }
 
         void CleanDst() {
             var stack = new Stack<string>();
-            stack.Push(_vm.Dst);
+            stack.Push(_vm.Dst.Value);
             while (stack.Count() > 0) {
                 string NowDir = stack.Pop();
-                string srcNowDir = _vm.Src + NowDir.Substring(_vm.Dst.Length);
+                string srcNowDir = _vm.Src + NowDir.Substring(_vm.Dst.Value.Length);
                 foreach (var file in Directory.EnumerateFiles(NowDir)) {
                     if (!file.EndsWith(".m4a") || !File.Exists(Path.ChangeExtension(Path.Combine(srcNowDir, Path.GetFileName(file)), ".wv"))) {
                         _vm.ListBoxitems.Add(new ListBoxTemplate((short)Listicon.delete, file));
@@ -85,7 +84,7 @@ namespace AudioSync {
             foreach (var cd in CleanDiretory) Directory.Delete(cd, true);
             foreach (var cf in CleanFile) File.Delete(cf);
             total = change[0] + change[1];
-            Parallel.ForEach(ArgQ, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, Q => SetProcess(Q));
+            ArgQ.AsParallel().ForAll(Q => SetProcess(Q));
         });
 
         void SetProcess(string arg) {
@@ -95,7 +94,7 @@ namespace AudioSync {
             };
             Process.Start(psi).WaitForExit();
             Interlocked.Increment(ref current);
-            _vm.Pvalue = (double)current / total;
+            _vm.Pvalue.Value = (double)current / total;
         }
     }
 }

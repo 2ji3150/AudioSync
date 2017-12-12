@@ -23,7 +23,7 @@ namespace AudioSync {
         ViewModel vm = new ViewModel();
         ResourceDictionary dict = new ResourceDictionary();
         readonly Uri us = new Uri($"..\\Resources\\StringResources.xaml", UriKind.Relative), jp = new Uri($"..\\Resources\\StringResources.ja.xaml", UriKind.Relative);
-        private void SyncCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Directory.Exists(vm.Src) && Directory.Exists(vm.Dst);
+        private void SyncCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Directory.Exists(vm.Src.Value) && Directory.Exists(vm.Dst.Value);
 
         private async void SyncCommand_Executed(object sender, ExecutedRoutedEventArgs e) {
             vm.ListBoxitems.Clear();
@@ -31,15 +31,15 @@ namespace AudioSync {
             ushort[] change = syncservice.Scan();
             SyncPreReport spr = new SyncPreReport(ref dict, ref change) { Owner = this };
             if (spr.ShowDialog() != true) {
-                vm.Idle = true;
+                vm.Idle.Value = true;
                 return;
             }
             await syncservice.Sync();
             SystemSounds.Asterisk.Play();
             MessageBox.Show(Properties.Resources.msgbox_complete);
             vm.ListBoxitems.Clear();
-            vm.Pvalue = 0;
-            vm.Idle = true;
+            vm.Pvalue.Value = 0;
+            vm.Idle.Value = true;
         }
 
         #region 多言語
@@ -62,29 +62,29 @@ namespace AudioSync {
 
         private void Src_ofd_Click(object sender, RoutedEventArgs e) {
             using (var dialog = new CommonOpenFileDialog() { IsFolderPicker = true }) {
-                if (dialog.ShowDialog() == CommonFileDialogResult.Ok) vm.Src = dialog.FileName;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok) vm.Src.Value = dialog.FileName;
             }
         }
         private void Dst_opd_Click(object sender, RoutedEventArgs e) {
             using (var dialog = new CommonOpenFileDialog() { IsFolderPicker = true }) {
-                if (dialog.ShowDialog() == CommonFileDialogResult.Ok) vm.Dst = dialog.FileName;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok) vm.Dst.Value = dialog.FileName;
             }
         }
 
-        private void Setting_Click(object sender, RoutedEventArgs e) => vm.ShowPanel = !vm.ShowPanel;
+        private void Setting_Click(object sender, RoutedEventArgs e) => vm.ShowPanel.Value = !vm.ShowPanel.Value;
         private void About_Click(object sender, RoutedEventArgs e) => MessageBox.Show($"{Assembly.GetExecutingAssembly().GetName().Version}{Environment.NewLine}by Heiseikiseki");
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            Settings.Default.src = vm.Src;
-            Settings.Default.dst = vm.Dst;
-            Settings.Default.outindex = vm.OutIndex;
-            Settings.Default.embed = vm.Embed;
-            Settings.Default.mirroring = vm.Mirroring;
+            Settings.Default.src = vm.Src.Value;
+            Settings.Default.dst = vm.Dst.Value;
+            Settings.Default.outindex = vm.OutIndex.Value;
+            Settings.Default.embed = vm.Embed.Value;
+            Settings.Default.mirroring = vm.Mirroring.Value;
             Settings.Default.Save();
         }
 
         private async void CheckNewVer_Click(object sender, RoutedEventArgs e) {
-            vm.Waiting = true;
+            vm.Waiting.Value = true;
             string newversion = null;
             await Task.Run(() => {
                 using (WebClient wc = new WebClient()) {
@@ -95,7 +95,7 @@ namespace AudioSync {
                     }
                 }
             });
-            vm.Waiting = false;
+            vm.Waiting.Value = false;
             if (Assembly.GetExecutingAssembly().GetName().Version.ToString() != newversion) {
                 if (MessageBox.Show(Properties.Resources.msgbox_haveupdate, "AudioSync", MessageBoxButton.YesNo, MessageBoxImage.Information) != MessageBoxResult.Yes) return;
                 Process.Start("https://sourceforge.net/projects/audio-sync/files/latest/download");

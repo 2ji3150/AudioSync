@@ -46,7 +46,7 @@
 
     </Window.Resources>
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo ProgressValue="{Binding Pvalue}" ProgressState="{Binding Waiting, Mode=OneWay, Converter={StaticResource ProgressStateConverter}}"/>
+        <TaskbarItemInfo ProgressValue="{Binding Pvalue.Value}" ProgressState="{Binding Waiting.Value, Mode=OneWay, Converter={StaticResource ProgressStateConverter}}"/>
     </Window.TaskbarItemInfo>
     <Grid>
         <Menu x:Name="menu" VerticalAlignment="Top" Margin="0" Background="White">
@@ -71,16 +71,16 @@
             </MenuItem>
         </Menu>
         <GroupBox x:Name="groupBox_src" Header="{DynamicResource sync_source}" VerticalAlignment="Top" Margin="4,24,125,0">
-            <Grid Margin="2" IsEnabled="{Binding Idle}">
-                <TextBox x:Name="input_path" Text="{Binding Src}" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="1,1,0,1"/>
+            <Grid Margin="2" IsEnabled="{Binding Idle.Value}">
+                <TextBox x:Name="input_path" Text="{Binding Src.Value}" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="1,1,0,1"/>
                 <Button x:Name="src_ofd" Content="..." HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="23" Click="Src_ofd_Click" BorderBrush="#FFABADB3"/>
             </Grid>
         </GroupBox>
-        <Grid Width="300" Margin="0,0,-305,0" HorizontalAlignment="Right" Panel.ZIndex="2" IsEnabled="{Binding Idle}">
+        <Grid Width="300" Margin="0,0,-305,0" HorizontalAlignment="Right" Panel.ZIndex="2" IsEnabled="{Binding Idle.Value}">
             <Grid.Style>
                 <Style>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ShowPanel}" Value="True">
+                        <DataTrigger Binding="{Binding ShowPanel.Value}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -102,7 +102,7 @@
             <Border BorderThickness="1,1,0,0" Margin="0,75,0,0" Panel.ZIndex="2" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
                 <Grid>
                     <GroupBox x:Name="groupBoxO" Header="{DynamicResource Output}" Margin="10,10,10,0" VerticalAlignment="Top" Style="{StaticResource SettingGroupBox}">
-                        <ComboBox x:Name="OutputSelect" VerticalAlignment="Top" Margin="2,4,2,2" FontSize="13" SelectedIndex="{Binding OutIndex}">
+                        <ComboBox x:Name="OutputSelect" VerticalAlignment="Top" Margin="2,4,2,2" FontSize="13" SelectedIndex="{Binding OutIndex.Value}">
                             <ComboBoxItem Content="LC-AAC --TVBR q127-- [qaac 2.62]" HorizontalAlignment="Left" Width="261"/>
                         </ComboBox>
                     </GroupBox>
@@ -113,12 +113,12 @@
                     </GroupBox>
                     <GroupBox x:Name="groupBox1" Header="{DynamicResource Option}" Margin="10,134,10,0"  Style="{StaticResource SettingGroupBox}" VerticalAlignment="Top" Height="76">
                         <Grid Margin="2,4,2,2">
-                            <CheckBox x:Name="FullSync" Content="{DynamicResource Mirroring}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" IsChecked="{Binding Mirroring}">
+                            <CheckBox x:Name="FullSync" Content="{DynamicResource Mirroring}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" IsChecked="{Binding Mirroring.Value}">
                                 <CheckBox.ToolTip>
                                     <TextBlock Text="{DynamicResource Mirroring_tooltip}"/>
                                 </CheckBox.ToolTip>
                             </CheckBox>
-                            <CheckBox x:Name="Embed" Content="{DynamicResource Embed_Artwork}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0" FontSize="13" IsChecked="{Binding Embed}">
+                            <CheckBox x:Name="Embed" Content="{DynamicResource Embed_Artwork}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0" FontSize="13" IsChecked="{Binding Embed.Value}">
                                 <CheckBox.ToolTip>
                                     <TextBlock Text="{DynamicResource Embed_tooltip}"/>
                                 </CheckBox.ToolTip>
@@ -133,8 +133,8 @@
         <Button  x:Name="setting" Content="☰" HorizontalAlignment="Right" VerticalAlignment="Top" Width="56" Margin="0,19,0,0" Click="Setting_Click" Height="56" Padding="0" BorderThickness="0" Background="White" FontSize="30"/>
         <GroupBox x:Name="groupBox_dst" Header="{DynamicResource sync_destination}" Margin="4,80,4,4">
             <Grid>
-                <Grid Margin="2,0" VerticalAlignment="Top" IsEnabled="{Binding Idle}">
-                    <TextBox x:Name="output_path" Text="{Binding Dst}" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="1,1,0,1"/>
+                <Grid Margin="2,0" VerticalAlignment="Top" IsEnabled="{Binding Idle.Value}">
+                    <TextBox x:Name="output_path" Text="{Binding Dst.Value}" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="1,1,0,1"/>
                     <Button x:Name="dst_opd" Content="..." VerticalAlignment="Top" Height="23" Click="Dst_opd_Click" BorderBrush="#FFABADB3" Width="26" HorizontalAlignment="Right" />
                 </Grid>
                 <ListBox x:Name="listView1" Margin="2,28,2,0" ItemsSource="{Binding ListBoxitems}" ItemTemplate="{DynamicResource DataTemplateItemStyle}"/>
