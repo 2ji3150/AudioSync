@@ -27,7 +27,7 @@ namespace AudioSync {
 
         private async void SyncCommand_Executed(object sender, ExecutedRoutedEventArgs e) {
             vm.ListBoxitems.Clear();
-            SyncService syncservice = new SyncService(ref vm);
+            SyncService syncservice = new SyncService(vm);
             int[] change = syncservice.Scan();
             SyncPreReport spr = new SyncPreReport(ref dict, ref change) { Owner = this };
             if (spr.ShowDialog() != true) {
@@ -99,8 +99,7 @@ namespace AudioSync {
             if (Assembly.GetExecutingAssembly().GetName().Version.ToString() != newversion) {
                 if (MessageBox.Show(Properties.Resources.msgbox_haveupdate, "AudioSync", MessageBoxButton.YesNo, MessageBoxImage.Information) != MessageBoxResult.Yes) return;
                 Process.Start("https://sourceforge.net/projects/audio-sync/files/latest/download");
-            }
-            else MessageBox.Show(Properties.Resources.msgbox_noupdate);
+            } else MessageBox.Show(Properties.Resources.msgbox_noupdate);
         }
     }
 }

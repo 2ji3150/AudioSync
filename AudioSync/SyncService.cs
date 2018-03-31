@@ -17,7 +17,7 @@ namespace AudioSync {
         enum Listicon : short { add, update, delete };
         private int total = 0, current = 0;
 
-        public SyncService(ref ViewModel vm) {
+        public SyncService(in ViewModel vm) {
             _vm = vm;
             opt = vm.Embed.Value ? new Outputter(new OutEmbededAppleCodec()) : new Outputter(new OutAppleCodec());
         }
