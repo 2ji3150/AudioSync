@@ -7,20 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioSync", "AudioSync\Audi
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
-		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8154147C-812F-4CEF-ACA2-AB9A04DAE9B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8154147C-812F-4CEF-ACA2-AB9A04DAE9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8154147C-812F-4CEF-ACA2-AB9A04DAE9B6}.Debug|x64.ActiveCfg = Debug|x64
-		{8154147C-812F-4CEF-ACA2-AB9A04DAE9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8154147C-812F-4CEF-ACA2-AB9A04DAE9B6}.Release|x64.ActiveCfg = Release|x64
 		{8154147C-812F-4CEF-ACA2-AB9A04DAE9B6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DF742AD-739C-4638-96A3-4EED02A76CF2}
 	EndGlobalSection
 EndGlobal
